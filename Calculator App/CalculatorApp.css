@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  padding: 2rem;
+}
+.container{
+    padding: 20px;
+}
+
+input{
+    font-size: 1rem;
+    padding: 9px;
+}
+
+.keypad{
+    margin: 3rem auto;
+    width: 25%;
+    padding: 10px;
+}
+
+button{
+    margin: 8px;
+    padding: 10px 12px;
+    font-size: 2rem;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+button:hover{
+    background-color: black;
+    color: white;
+}
