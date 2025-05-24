@@ -1,0 +1,56 @@
+import React, { useState ,useEffect} from "react";
+
+function App(){
+  const [ notes ,setNotes ] = useState(()=>{
+    return JSON.parse(localStorage.getItem("notes")) || []
+  });
+
+  const [input,setInput]=useState("");
+
+  useEffect(()=>{
+    localStorage.setItem("notes",JSON.stringify(notes));
+  },[notes])
+
+  const addNote=()=>{
+    if(input.trim() === "") return;
+    setNotes([...notes,{ text:input,completed: false }]);
+    setInput("");
+  }
+
+  const deleteNote=(index)=>{
+    setNotes(notes.filter((_,i)=>i!==index));
+  }
+
+  const toggleNote=(index)=>{
+    const newNote=[...notes];
+    newNote[index].completed = !newNote[index].completed;
+    setNotes(newNote);
+  }
+
+  return(
+    <div>
+      <h1>Notes</h1>
+      <input 
+      value={input}
+      onChange={(e)=>setInput(e.target.value)}
+      placeholder="enter note"
+      />
+      <button onClick={addNote}>Add Note</button>
+      <ul>
+        {
+          notes.map((note,id)=>(
+            <li key={id} 
+            style={{textDecoration: note.completed ? "line-through":"none"}}
+            >
+              <span onClick={()=>toggleNote(id)} >{note.text}</span>
+              <button onClick={()=>deleteNote(id)} >Delete</button>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  )
+
+}
+
+export default App;
