@@ -1,0 +1,25 @@
+import React, { useState } from 'react';
+
+const quotes = [
+  "Believe in yourself.",
+  "Keep going.",
+  "Stay positive.",
+  "You can do it!"
+];
+
+function QuoteGenerator() {
+  const [quote, setQuote] = useState(quotes[0]);
+
+  const getRandomQuote = () => {
+    const random = Math.floor(Math.random() * quotes.length);
+    setQuote(quotes[random]);
+  };
+  return (
+    <div style={{ padding: '40px', textAlign: 'center' }}>
+      <h2>{quote}</h2>
+      <button onClick={getRandomQuote}>New Quote</button>
+    </div>
+  );
+}
+
+export default QuoteGenerator;
