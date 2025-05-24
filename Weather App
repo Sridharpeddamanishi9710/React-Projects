@@ -1,0 +1,40 @@
+import React, { useState } from "react";
+
+const API_KEY = "4e9492704c70d2f29f71063984da9d31";
+
+function App() {
+  const [city, setCity] = useState("");
+  const [weather, setWeather] = useState(null);
+
+  const getWeather = async () => {
+    if (!city) return;
+    const res = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`
+    );
+    const data = await res.json();
+    console.log(data);
+    setWeather(data);
+  };
+
+  return (
+    <div style={{ padding: 20 ,textAlign:"center"}}>
+      <h2>Weather App</h2>
+      <input
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+        placeholder="Enter city"
+      />
+      <button onClick={getWeather}>Search</button>
+      {weather?.main && (
+        <div>
+          <h3>{weather.name}</h3>
+          <p>🌡 Temp: {weather.main.temp} °C</p>
+          <p>☁ Weather: {weather.weather[0].description}</p>
+          <p>Wind: {weather.wind.speed}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default App;
